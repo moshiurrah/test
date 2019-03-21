@@ -20,8 +20,8 @@ import logo from '../assets/logo.png';
 function validate(email, password) {
   // true means invalid, so our conditions got reversed
   return {
-    email: email.length === 0,
-    password: password.length === 0
+    name: name.length === 0,
+    description: description.length === 0
   };
  }
 
@@ -63,7 +63,7 @@ class ItemModal extends Component {
   };
 
   render() {
-    //const errors = validate(this.state.name, this.state.description);
+    const errors = validate(this.state.name, this.state.description);
     return (
       <div>
         {this.props.isAuthenticated ? (
