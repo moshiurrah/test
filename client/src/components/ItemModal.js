@@ -16,23 +16,12 @@ import { addItem } from '../actions/itemActions';
 import PropTypes from 'prop-types';
 import logo from '../assets/logo.png';
 
-//form field validate function
-function validate(email, password) {
-  // true means invalid, so our conditions got reversed
-  return {
-    name: name.length === 0,
-    description: description.length === 0
-  };
- }
-
 class ItemModal extends Component {
   state = {
     modal: false,
     name: '',
     description: ''
   };
-  
- 
   static propTypes = {
     isAuthenticated: PropTypes.bool
   };
@@ -49,7 +38,6 @@ class ItemModal extends Component {
 
   onSubmit = e => {
     e.preventDefault();
-    const errors = validate(this.state.name, this.state.password);
     const newItem = {
       name: this.state.name,
       description: this.state.description
@@ -63,7 +51,6 @@ class ItemModal extends Component {
   };
 
   render() {
-    const errors = validate(this.state.name, this.state.description);
     return (
       <div>
         {this.props.isAuthenticated ? (
@@ -89,7 +76,6 @@ class ItemModal extends Component {
               <FormGroup>
                 <Label for='item'>Item</Label>
                 <Input
-                  className={errors.name ? "error" : ""}
                   type='text'
                   name='name'
                   id='item'
@@ -98,7 +84,6 @@ class ItemModal extends Component {
                 />
                 <Label for='description'>Description</Label>
                 <Input
-                  className={errors.description ? "error" : ""}
                   type='textarea'
                   name='description'
                   id='description'
