@@ -49,7 +49,7 @@ class ItemModal extends Component {
 
   onSubmit = e => {
     e.preventDefault();
-    const errors = validate(this.state.email, this.state.password);
+    const errors = validate(this.state.name, this.state.password);
     const newItem = {
       name: this.state.name,
       description: this.state.description
@@ -63,6 +63,7 @@ class ItemModal extends Component {
   };
 
   render() {
+    //const errors = validate(this.state.name, this.state.description);
     return (
       <div>
         {this.props.isAuthenticated ? (
@@ -88,7 +89,7 @@ class ItemModal extends Component {
               <FormGroup>
                 <Label for='item'>Item</Label>
                 <Input
-                  className={errors.email ? "error" : ""}
+                  className={errors.name ? "error" : ""}
                   type='text'
                   name='name'
                   id='item'
@@ -97,7 +98,7 @@ class ItemModal extends Component {
                 />
                 <Label for='description'>Description</Label>
                 <Input
-                  className={errors.email ? "error" : ""}
+                  className={errors.description ? "error" : ""}
                   type='textarea'
                   name='description'
                   id='description'
