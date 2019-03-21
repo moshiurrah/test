@@ -12,6 +12,7 @@ import {
   Alert
 } from 'reactstrap';
 import { connect } from 'react-redux';
+import { ValidatorForm } from 'react-form-validator-core';
 import { addItem } from '../actions/itemActions';
 import PropTypes from 'prop-types';
 import logo from '../assets/logo.png';
@@ -83,6 +84,8 @@ class ItemModal extends Component {
                   name='name'
                   id='item'
                   placeholder='Add an item'
+                  validators={['required', 'isEmpty']}
+                  errorMessages={['this field is required']}
                   onChange={this.onChange}
                 />
                 <Label for='description'>Description</Label>
@@ -91,6 +94,8 @@ class ItemModal extends Component {
                   name='description'
                   id='description'
                   placeholder='Add a brief description'
+                  validators={['required', 'isEmpty']}
+                  errorMessages={['this field is required']}
                   onChange={this.onChange}
                 />
                 <Button color='dark' style={{ marginTop: '2rem' }} block>
