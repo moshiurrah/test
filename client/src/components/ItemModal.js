@@ -37,7 +37,7 @@ class ItemModal extends Component {
     modal: false,
     name: '',
     description: '',
-    error:[]
+    errors:[]
   };
 
   static propTypes = {
