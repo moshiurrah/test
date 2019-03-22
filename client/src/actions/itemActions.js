@@ -46,6 +46,20 @@ export const deleteItem = id => (dispatch, getState) => {
     );
 };
 
+export const updateItem = id => (dispatch, getState) => {
+  axios
+    .put(`/api/items/${id}`, tokenConfig(getState))
+    .then(res =>
+      dispatch({
+        type: UPDATE_ITEM,
+        payload: res.data
+      })
+    )
+    .catch(err =>
+      dispatch(returnErrors(err.response.data, err.response.status))
+    );
+};
+
 export const setItemsLoading = () => {
   return {
     type: ITEMS_LOADING
