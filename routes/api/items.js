@@ -35,4 +35,13 @@ router.delete('/:id', auth, (req, res) => {
     .catch(err => res.status(404).json({ success: false }));
 });
 
+// @route   UPDATE api/items/:id
+// @desc    Update A Item
+// @access  Private
+router.put('/:id', auth, (req, res) => {
+   Item.findOneAndUpdate({ _id: req.params.id }, req.body)
+     .then(item => res.json(item))
+     .catch(err => res.status(422).json({ success: false }));
+});
+
 module.exports = router;
