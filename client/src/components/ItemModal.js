@@ -79,6 +79,7 @@ class ItemModal extends Component {
                   type='text'
                   name='name'
                   id='item'
+                  required
                   placeholder='Add an item'
                   onChange={this.onChange}
                 />
@@ -87,6 +88,7 @@ class ItemModal extends Component {
                   type='textarea'
                   name='description'
                   id='description'
+                  required
                   placeholder='Add a brief description'
                   onChange={this.onChange}
                 />
