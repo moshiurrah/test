@@ -16,12 +16,30 @@ import { addItem } from '../actions/itemActions';
 import PropTypes from 'prop-types';
 import logo from '../assets/logo.png';
 
+
+function validate(name, description) {
+  // we are going to store errors for all fields
+  // in a signle array
+  const errors = [];
+
+  if (name.length === 0) {
+    errors.push("Name can't be empty");
+  }
+  if (description.length === 0) {
+    errors.push("Description can't be empty");
+  }
+ 
+  return errors;
+}
+
 class ItemModal extends Component {
   state = {
     modal: false,
     name: '',
-    description: ''
+    description: '',
+    error:[]
   };
+
   static propTypes = {
     isAuthenticated: PropTypes.bool
   };
@@ -43,6 +61,12 @@ class ItemModal extends Component {
       description: this.state.description
     };
 
+    const errors = validate(name, description);
+    if (errors.length > 0) {
+      this.setState({ errors });
+      return;
+    }
+
     // Add item via addItem action
     this.props.addItem(newItem);
 
@@ -51,6 +75,8 @@ class ItemModal extends Component {
   };
 
   render() {
+
+    const { errors } = this.state;
     return (
       <div>
         {this.props.isAuthenticated ? (
@@ -73,6 +99,9 @@ class ItemModal extends Component {
           <ModalHeader toggle={this.toggle}>Add Rent/Sell an Items</ModalHeader>
           <ModalBody>                   
             <Form onSubmit={this.onSubmit}>
+              {errors.map(error => (
+               <p key={error}>Error: {error}</p>
+               ))}
               <FormGroup>
                 <Label for='item'>Item</Label>
                 <Input
@@ -80,7 +109,7 @@ class ItemModal extends Component {
                   name='name'
                   id='item'
                   placeholder='Add an item'
-                  onChange={this.onChange}
+                  onChange={evt => this.setState({ name: evt.target.value })}
                 />
                 <Label for='description'>Description</Label>
                 <Input
@@ -88,7 +117,7 @@ class ItemModal extends Component {
                   name='description'
                   id='description'
                   placeholder='Add a brief description'
-                  onChange={this.onChange}
+                  onChange={evt => this.setState({ description: evt.target.value })}
                 />
                 <Button color='dark' style={{ marginTop: '2rem' }} block>
                   Add Item
